@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using SH.Framework.Application.Common.Cqrs;
 using SH.Framework.Library.Cqrs;
+using SH.Framework.Library.Cqrs.Implementation;
 
 namespace SH.Framework.Application.Features.Home;
 
@@ -12,7 +12,7 @@ public class HomeIndexQuery
 {
     public class Query : Request<Response>;
 
-    public record Response(string Version);
+    public record Response(string AssemblyVersion);
     
     public class Handler : RequestHandler<Query, Response>
     {
