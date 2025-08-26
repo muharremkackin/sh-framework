@@ -23,6 +23,8 @@ public abstract class BaseConfiguration<TEntity, TKey>: IEntityTypeConfiguration
         ConfigurePasswordColumn(builder);
         ConfigureApiKeyColumn(builder);
         ConfigureApiSecretColumn(builder);
+        ConfigureAdditionalInfoColumn(builder);
+        ConfigureDeletableColumn(builder);
         ConfigureTypeIdColumn(builder);
         ConfigureGroupIdColumn(builder);
         ConfigureCategoryIdColumn(builder);
@@ -121,6 +123,12 @@ public abstract class BaseConfiguration<TEntity, TKey>: IEntityTypeConfiguration
     {
         if (typeof(IHasAdditionalInfoColumn).IsAssignableFrom(typeof(TEntity)))
             builder.Property(x => ((IHasAdditionalInfoColumn)x).AdditionalInfo).HasMaxLength(4000);  
+    }
+
+    protected virtual void ConfigureDeletableColumn(EntityTypeBuilder<TEntity> builder)
+    {
+        if (typeof(IHasDeletableColumn).IsAssignableFrom(typeof(TEntity)))
+            builder.Property(x => ((IHasDeletableColumn)x).Deletable); 
     }
 
     protected virtual void ConfigureTypeIdColumn(EntityTypeBuilder<TEntity> builder)

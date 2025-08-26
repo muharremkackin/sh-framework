@@ -12,7 +12,7 @@ using SH.Framework.Persistence.SqlServer;
 namespace SH.Framework.Persistence.SqlServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250826122042_InitialMigration")]
+    [Migration("20250826133256_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -180,6 +180,9 @@ namespace SH.Framework.Persistence.SqlServer.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Deletable")
+                        .HasColumnType("bit");
+
                     b.Property<Guid?>("DeletedById")
                         .HasColumnType("uniqueidentifier");
 
@@ -267,7 +270,8 @@ namespace SH.Framework.Persistence.SqlServer.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AdditionalInfo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
 
                     b.Property<string>("CategoryId")
                         .HasColumnType("nvarchar(max)");
