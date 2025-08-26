@@ -8,7 +8,7 @@ namespace SH.Framework.Domain.Entities;
 public class Role: IdentityRole<Guid>, IEntity, IHasDomainEvents, IHasPrimaryKey<Guid>
 {
     public const string Schema = "Identity";
-    public const string Table = nameof(User);
+    public const string Table = nameof(Role);
     
     private readonly List<INotification> _notifications = new();
     public IReadOnlyCollection<INotification> Notifications  => _notifications.AsReadOnly();

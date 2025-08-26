@@ -1,24 +1,17 @@
 using SH.Framework.Application;
-using SH.Framework.Application.Features;
-using SH.Framework.Application.Features.Home;
+using SH.Framework.Persistence.SqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-builder.Services.AddApplicationLayer();
+builder.Services.AddApplicationLayer(builder.Configuration);
+builder.Services.AddPersistenceSqlServerConfiguration(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
 
 app.UseHttpsRedirection();
-app.MapFeatureEndpoints();
+app.UseApplicationLayer();
+app.UsePersistenceSqlServerConfiguration();
 
 app.Run();
 
